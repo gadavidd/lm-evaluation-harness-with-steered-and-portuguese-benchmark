@@ -1,30 +1,27 @@
 tag:
   - pt_benchmark
-  - vestibular
+  - cultural_reasoning
 
-dataset_path: eduagarcia/enem_challenge
-custom_dataset: !function util.enem_custom_dataset
+task: broverbs_proverb_to_history
+task_alias: broverbs_p2h
 
-task: enem_challenge
-task_alias: enem
+dataset_path: Tropic-AI/BRoverbs
+custom_dataset: !function util.broverbs_proverb_to_history_custom_dataset
 
-test_split: train
+test_split: test
 
 fewshot_config:
   sampler: first_n
-  samples: !function util.enem_fewshot_samples
+  samples: !function util.broverbs_proverb_to_history_fewshot_samples
 
-num_fewshot: 3
+num_fewshot: 5
 
-description: "As perguntas a seguir são questões de múltipla escolha do Exame Nacional do Ensino Médio (ENEM), selecione a única alternativa correta e responda apenas com as letras \"A\", \"B\", \"C\", \"D\" ou \"E\".\n\n"
+description: "A seguir há um provérbio brasileiro. Escolha a história que melhor corresponde ao seu significado. Responda apenas com as letras \"A\", \"B\", \"C\", \"D\" ou \"E\".\n\n"
 
 output_type: generate_until
 
-doc_to_text: !function util.enem_doc_to_text
-doc_to_target: "{{answerKey}}"
-
-should_decontaminate: true
-doc_to_decontamination_query: !function util.enem_doc_to_text
+doc_to_text: !function util.broverbs_proverb_to_history_doc_to_text
+doc_to_target: !function util.broverbs_correct_index_target
 
 generation_kwargs:
   until:
@@ -59,4 +56,4 @@ metric_list:
     higher_is_better: true
 
 metadata:
-  version: 1.2
+  version: 1.0

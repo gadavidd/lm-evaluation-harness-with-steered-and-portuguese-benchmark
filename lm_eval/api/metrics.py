@@ -150,7 +150,7 @@ def brier_score(items):  # This is a passthrough function
 def brier_score_fn(items):  # This is a passthrough function
     return items
 
-@register_aggregation("f1_macro")
+@register_aggregation("f1_macro_score")
 def f1_macro_score(items):
     unzipped_list = list(zip(*items))
     golds = unzipped_list[0]
@@ -405,10 +405,10 @@ def f1_fn(items):  # This is a passthrough function
     return items
 
 @register_metric(
-    metric="f1_macro",
+    metric="f1_macro_score",
     higher_is_better=True,
     output_type="multiple_choice",
-    aggregation="f1_macro",
+    aggregation="f1_macro_score",
 )
 def f1_macro_fn(items):  # This is a passthrough function
     return items
